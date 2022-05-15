@@ -1,0 +1,49 @@
+esphome:
+  name: farmstand
+  platform: ESP8266
+  board: esp12e
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+ota:
+  password: "0c235d24f1c0d33454b0593ad52cdb2c"
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Farmstand Fallback Hotspot"
+    password: "OEOOpxRwvUJf"
+
+captive_portal:
+
+# Use the blue LED in the device as a status LED, which will blink if there are warnings (slow) or errors (fast)
+status_led:
+  pin:
+    number: GPIO5
+    inverted: True
+
+# Four relay outputs, exposed as switches in Home Assistant
+switch:
+  - platform: gpio
+    pin: GPIO16
+    name: Relay1
+    id: relay1
+  - platform: gpio
+    pin: GPIO14
+    name: Relay2
+    id: relay2
+  - platform: gpio
+    pin: GPIO12
+    name: Relay3
+    id: relay3
+  - platform: gpio
+    pin: GPIO13
+    name: Relay4
+    id: relay4
